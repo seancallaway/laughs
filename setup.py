@@ -10,7 +10,7 @@
 from setuptools import setup
 
 setup(name='laughs',
-      version='0.1.0',
+      version='0.1.2',
       description='Pulls jokes from various APIs',
       classifiers=[
           'Development Status :: 4 - Beta',
@@ -22,5 +22,8 @@ setup(name='laughs',
       author='Sean Callaway',
       author_email='seancallaway@gmail.com',
       license='MIT',
-      packages=['laughs'],
+      packages=['laughs', 'laughs.services'],
+      install_requires=[
+          'requests',
+      ],
       zip_safe=False)
