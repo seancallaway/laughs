@@ -11,10 +11,15 @@ import requests
 import json
 
 def get_joke():
-	"""Returns a joke from the WebKnox one liner API."""
+    """Returns a joke from the WebKnox one liner API.
+    
+    Returns None if unable to retrieve a joke.
+    """
 
+    page = requests.get("https://catfact.ninja/fact")
 
-	page = requests.get("https://catfact.ninja/fact")
-	joke = json.loads(page.content.decode("UTF-8"))
+    if page.status_code == 200:
+       joke = json.loads(page.content.decode("UTF-8"))
+       return joke["fact"]
 
-	return joke["fact"]
+    return None

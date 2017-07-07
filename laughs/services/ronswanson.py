@@ -11,10 +11,16 @@ import requests
 import json
 
 def get_joke():
-	"""Return a Ron Swanson quote."""
+    """Return a Ron Swanson quote.
 
-	page = requests.get("http://ron-swanson-quotes.herokuapp.com/v2/quotes")
-	jokes = []
-	jokes = json.loads(page.content.decode(page.encoding))
+    Returns None if unable to retrieve a quote.
+    """
 
-	return '"' + jokes[0] + '" - Ron Swanson'
+    page = requests.get("http://ron-swanson-quotes.herokuapp.com/v2/quotes")
+    
+    if page.status_code == 200:
+        jokes = []
+        jokes = json.loads(page.content.decode(page.encoding))
+        return '"' + jokes[0] + '" - Ron Swanson'
+
+    return None

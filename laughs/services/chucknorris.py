@@ -11,10 +11,16 @@ import requests
 import json
 
 def get_joke():
-	"""Returns a joke from the WebKnox one liner API."""
+    """Returns a joke from the WebKnox one liner API.
+    
+    Returns None if unable to retrieve a joke.
+    """
 
 
-	page = requests.get("https://api.chucknorris.io/jokes/random")
-	joke = json.loads(page.content.decode("UTF-8"))
+    page = requests.get("https://api.chucknorris.io/jokes/random")
 
-	return joke["value"]
+    if page.status_code == 200:
+       joke = json.loads(page.content.decode("UTF-8"))
+       return joke["value"]
+
+    return None
